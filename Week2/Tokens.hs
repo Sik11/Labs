@@ -13,7 +13,7 @@ import Data.Array
 #else
 import Array
 #endif
-#define ALEX_BASIC 1
+#define ALEX_POSN 1
 -- -----------------------------------------------------------------------------
 -- Alex wrapper code.
 --
@@ -3383,6 +3383,7 @@ alex_actions = array (0 :: Int, 15)
 {-# LINE 28 "Tokens.x" #-}
 -- Each action has type :: String -> Token 
 -- The token type: 
+Token :: AlexPosn -> String -> Token
 data Token = 
   TokenLet         | 
   TokenIn          | 
@@ -3398,11 +3399,19 @@ data Token =
   TokenRParen       
   deriving (Eq,Show) 
 
-main :: IO ()
-main  = do 
-    (filename:_) <- getArgs
-    s <- readFile filename
-    print (alexScanTokens s)
+tokenPosn :: Token -> String
+tokenPosn (TokenInt  (AlexPn a l c) n) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenVar  (AlexPn a l c) x) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenLet (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenIn  (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenEq  (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenPlus (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenMinus (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenTimes (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenDiv (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenExp (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenLParen (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenRParen (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
 alex_action_2 = \s -> TokenLet
 alex_action_3 = \s -> TokenIn
 alex_action_4 = \s -> TokenInt (read s)

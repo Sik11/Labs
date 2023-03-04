@@ -3,7 +3,7 @@ module Tokens where
 import System.Environment ( getArgs )
 }
 
-%wrapper "basic" 
+%wrapper "posn" 
 $digit = 0-9     
 -- digits 
 $alpha = [a-zA-Z]    
@@ -28,6 +28,7 @@ $white+       ;
 { 
 -- Each action has type :: String -> Token 
 -- The token type: 
+Token :: AlexPosn -> String -> Token
 data Token = 
   TokenLet         | 
   TokenIn          | 
@@ -43,11 +44,23 @@ data Token =
   TokenRParen       
   deriving (Eq,Show) 
 
-main :: IO ()
-main  = do 
-    (filename:_) <- getArgs
-    s <- readFile filename
-    print (alexScanTokens s)
+tokenPosn :: Token -> String
+tokenPosn (TokenInt  (AlexPn a l c) n) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenVar  (AlexPn a l c) x) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenLet (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenIn  (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenEq  (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenPlus (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenMinus (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenTimes (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenDiv (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenExp (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenLParen (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenRParen (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
 }
+
+
+
+
 
 
