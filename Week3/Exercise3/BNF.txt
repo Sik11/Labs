@@ -1,0 +1,6 @@
+<program> ::= <instruction> | <instruction> <program>
+<instruction> ::=  Rotate <dir> | <if-statement> | Forward <int> 
+<if-statement> ::= if Check <int> then <program> else <program>
+<int> ::= <digit> | <digit> <int>
+<digit> ::= 0 | 1 | 2 | ... | 8 | 9
+<dir> ::= L | R
