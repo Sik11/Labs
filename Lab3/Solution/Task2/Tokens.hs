@@ -3833,10 +3833,10 @@ data Token =
   deriving (Eq,Show) 
 
 tokenPosn :: Token -> String
-tokenPosn (TokenInt  (AlexPn a l c) n) = show(l) ++ ":" ++ show(c)
-tokenPosn (TokenVar  (AlexPn a l c) x) = show(l) ++ ":" ++ show(c)
 tokenPosn (TokenLet (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
 tokenPosn (TokenIn  (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenInt  (AlexPn a l c) n) = show(l) ++ ":" ++ show(c)
+tokenPosn (TokenVar  (AlexPn a l c) x) = show(l) ++ ":" ++ show(c)
 tokenPosn (TokenEq  (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
 tokenPosn (TokenPlus (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
 tokenPosn (TokenMinus (AlexPn a l c)) = show(l) ++ ":" ++ show(c)
