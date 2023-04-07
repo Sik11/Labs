@@ -1,0 +1,11 @@
+1+1 - Parsed as Plus (Int 1) (Int 1)
+true - Parsed as TTrue
+false - Parsed as TFalse
+29 - Parsed as Int 29
+1<2 - Parsed as Less (Int 1) (Int 2)
+baby - Parsed as Var "baby"
+if (true) then 0 else 1 - Parsed as Cond TTrue (Int 0) (Int 1) 
+if (false) then 0 else 1 - Parsed as Cond TFalse (Int 0) (Int 1)
+lam x true - Parsed as Lambda "x" TInt TTrue
+let baby = 1 in baby < 2 - Parsed as Let "baby" TInt (Int 1) (Less (Var "baby") (Int 2))
+baby baby  

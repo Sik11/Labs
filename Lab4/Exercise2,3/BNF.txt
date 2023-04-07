@@ -1,4 +1,0 @@
-T,U :: == Int | Bool | T -> T
-E :: n | true | false | E < E | E + E | x |
-    if E then E else E | \(x:T) -> E|
-    let (x:T) = E in E | E E
